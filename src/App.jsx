@@ -4,21 +4,28 @@ import Game from './scenes/Game';
 
 const App = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [highScore, setHighScore] = useState(0);
+
+  const handleScoreUpdate = (score) => {
+    if (score > highScore) {
+      setHighScore(score);
+    }
+  };
 
   const startGame = () => {
     setIsGameStarted(true);
   };
 
   const gameOver = () => {
-    setIsGameStarted(false);  // Reset to start screen on game over
+    setIsGameStarted(false);
   };
 
   return (
     <>
       {isGameStarted ? (
-        <Game onGameOver={gameOver} />  // Pass the gameOver function to the Game component
+        <Game onGameOver={gameOver} onScoreUpdate={handleScoreUpdate} />
       ) : (
-        <StartScreen startGame={startGame} />  // Show StartScreen if game hasn't started
+        <StartScreen startGame={startGame} highScore={highScore} />
       )}
     </>
   );

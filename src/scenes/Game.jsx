@@ -56,6 +56,8 @@ const Game = ({ onGameOver }) => {
                     new THREE.MeshStandardMaterial({ color })
                 );
 
+                {/* Below sets the sides of the boxes for collision in game */}
+
                 this.width = width
                 this.height = height
                 this.depth = depth
@@ -276,7 +278,9 @@ const Game = ({ onGameOver }) => {
               if (boxCollision({ box1: bullet, box2: enemy })) {
                 scene.remove(enemy);
                 enemies.splice(enemyIndex, 1);
+
                 setScore((prevScore) => prevScore + 10);
+
                 scene.remove(bullet);
                 bullets.splice(index, 1);
               };
